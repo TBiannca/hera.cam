@@ -10,24 +10,8 @@ async function run() {
 
     const verify = tf.node.decodeImage(fs.readFileSync('./public/images/elon-musk2.jpg'))
 
-    const labels = ['elon-musk']
-    const labeledFaceDescriptors = await Promise.all(
-        labels.map(async label => {
-            const imgUrl = `./public/images/${label}.jpg`
-            const img = tf.node.decodeImage(fs.readFileSync(imgUrl))
-            
-            const fullFaceDescription = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
-            
-            if (!fullFaceDescription) {
-              throw new Error(`no faces detected for ${label}`)
-            }
-            
-            const faceDescriptors = [fullFaceDescription.descriptor]
-            return new faceapi.LabeledFaceDescriptors(label, faceDescriptors)
-          })
-      )
-
-    const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
+    const labeledFaceDescriptors = await loadLabeledImages();
+    const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6);
 
     const singleResult = await faceapi
     .detectSingleFace(verify)
@@ -38,7 +22,41 @@ async function run() {
         const bestMatch = faceMatcher.findBestMatch(singleResult.descriptor)
         console.log(bestMatch.toString())
     }
-
 }
 
 run()
+
+const loadLabeledImages = () => {
+  const labels = ['elon-musk']
+  return Promise.all(
+    labels.map(async label => {
+
+      const descriptions = []
+      const numberOfImages = fs.readdirSync('./public/images').length
+
+      for (let i = 2; i <= numberOfImages + 1; i++) {
+        const imgUrl = `./public/images/elon-musk${i}.jpg`
+        const img = tf.node.decodeImage(fs.readFileSync(imgUrl))
+        const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
+        descriptions.push(detections.descriptor)
+      }
+
+      const foo = JSON.stringify(descriptions)
+      const foo2 = btoa(foo)
+
+      const foo3 = atob(foo2)
+      const foo4 = Object.values(JSON.parse(foo3))
+
+      var outputData = foo4.map( Object.values );
+      //console.log('INAPOI', outputData);
+      //console.log('------------------------------------------------------------------');
+
+
+      let fooo = []
+      const final = outputData.map(array => fooo.push(new Float32Array(array)))
+      //console.log(descriptions);
+      console.log(fooo);
+      return new faceapi.LabeledFaceDescriptors(label, fooo)
+    })
+  )
+}
