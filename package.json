@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "main": "app.js",
   "dependencies": {
+    "@apollo/client": "^3.6.8",
+    "@reduxjs/toolkit": "^1.8.2",
+    "axios": "^0.27.2",
     "canvas": "^2.9.1",
+    "cross-fetch": "^3.1.5",
     "face-api.js": "^0.22.2",
-    "node-fetch": "^3.2.4"
+    "node-fetch": "^3.2.4",
+    "redux": "^4.2.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-observable": "^2.0.0",
+    "rxjs": "^7.5.5"
   },
   "devDependencies": {
     "@tensorflow/tfjs-node": "^1.7.0"
