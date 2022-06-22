@@ -1,9 +1,9 @@
 const getPersons = require('./get-persons')
 const faceapi = require('face-api.js')
 
-const loadLabeledDescriptors = async () => {
+const loadLabeledDescriptors = async token => {
     
-    const persons = await getPersons
+ const persons = await getPersons(token)
 
     persons.map(person => console.log(person.name))
     return Promise.all(
@@ -14,7 +14,7 @@ const loadLabeledDescriptors = async () => {
             var outputData = descriptors.map( Object.values )
             let fooo = []
             const final = outputData.map(array => fooo.push(new Float32Array(array)))
-            console.log('AYYYY',fooo);
+            //console.log('AYYYY',fooo);
 
         return new faceapi.LabeledFaceDescriptors(person.name, fooo)
       })
