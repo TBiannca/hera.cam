@@ -6,6 +6,9 @@ const getToken = require('./get-user')
 
 const run = async () => {
 
+  const spawn = require("child_process").spawn;
+  const pythonProcess = spawn('python',["run.py"])
+
   await faceapi.nets.ssdMobilenetv1.loadFromDisk('./public/models')
   await faceapi.nets.faceLandmark68Net.loadFromDisk('./public/models')
   await faceapi.nets.faceRecognitionNet.loadFromDisk('./public/models')
