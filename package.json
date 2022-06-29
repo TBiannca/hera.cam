@@ -5,6 +5,7 @@
   "dependencies": {
     "@apollo/client": "^3.6.8",
     "@reduxjs/toolkit": "^1.8.2",
+    "@vladmandic/face-api": "^1.6.10",
     "axios": "^0.27.2",
     "canvas": "^2.9.1",
     "cross-fetch": "^3.1.5",
@@ -16,7 +17,7 @@
     "rxjs": "^7.5.5"
   },
   "devDependencies": {
-    "@tensorflow/tfjs-node": "^1.7.0"
+    "@tensorflow/tfjs-node": "3.8.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
