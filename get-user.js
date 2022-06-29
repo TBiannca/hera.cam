@@ -4,7 +4,7 @@ const https = require('https')
 const getToken = async () => axios({
     httpsAgent: new https.Agent({ rejectUnauthorized: false }),
     method: 'post',
-    url: 'https://localhost:7216/auth/login',
+    url: 'http://192.168.0.137:5172/auth/login',
     data: {
         userName: "admin145",
         password: "Admin1!"

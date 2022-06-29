@@ -3,7 +3,7 @@ const https = require('https')
 
 const getPersons = async token => axios({
         httpsAgent: new https.Agent({ rejectUnauthorized: false }),
-        url: 'https://localhost:7216/graphql',
+        url: 'http://192.168.0.137:5172/graphql',
         method: 'POST',
         headers:  {
           authorization: `Bearer ${token}`,
