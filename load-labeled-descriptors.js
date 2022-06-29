@@ -1,5 +1,5 @@
 const getPersons = require('./get-persons')
-const faceapi = require('face-api.js')
+const faceapi = require('@vladmandic/face-api')
 
 const loadLabeledDescriptors = async token => {
     
